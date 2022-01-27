@@ -1,10 +1,18 @@
+import styled from "styled-components";
+import PhoneTop from "./components/PhoneTop";
 import "./styles.css";
+
+const Phone = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+`;
 
 export default function App() {
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-    </div>
+    <Phone className="App">
+      <PhoneTop />
+    </Phone>
   );
 }
