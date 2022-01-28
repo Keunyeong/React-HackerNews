@@ -11,7 +11,7 @@ const PhoneStatus = styled.div`
     display: none;
   }
   align-items: center;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `;
 
 const Watch = styled.div`

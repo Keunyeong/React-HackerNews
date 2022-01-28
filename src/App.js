@@ -1,18 +1,22 @@
 import styled from "styled-components";
+import GlobalStyle from "./Global";
 import PhoneTop from "./components/PhoneTop";
 import "./styles.css";
+import Application from "./components/Application";
 
 const Phone = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0;
-  margin: 0;
 `;
 
 export default function App() {
   return (
-    <Phone className="App">
-      <PhoneTop />
-    </Phone>
+    <>
+      <GlobalStyle />
+      <Phone className="App">
+        <PhoneTop />
+        <Application />
+      </Phone>
+    </>
   );
 }
