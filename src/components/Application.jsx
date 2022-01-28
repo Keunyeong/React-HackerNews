@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import ContentsSection from "./ContentsSection";
 import Head from "./Head";
 import Nav from "./Nav";
 
@@ -17,6 +18,7 @@ const Application = () => {
     <App>
       <Head />
       <Nav />
+      <ContentsSection />
     </App>
   );
 };

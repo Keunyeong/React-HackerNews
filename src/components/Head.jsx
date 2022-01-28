@@ -1,8 +1,12 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const HeadEl = styled.header`
   display: flex;
   align-items: center;
+  & .link {
+    text-decoration: none;
+  }
   @media screen and (max-width: 375px) {
     width: 375px;
     height: 60px;
@@ -83,10 +87,12 @@ const Head = () => {
   return (
     <HeadEl>
       <ImgBox src="images/HackerNewsLogo.png" alt="LOGO" />
-      <TitleBox>
-        <SubTitle>React</SubTitle>
-        <Title>Hacker News</Title>
-      </TitleBox>
+      <Link className="link" to="/">
+        <TitleBox>
+          <SubTitle>React</SubTitle>
+          <Title>Hacker News</Title>
+        </TitleBox>
+      </Link>
       <OptionBox>
         <img src="images/DarkMode.png" alt="DARKMODE" />
         <img src="images/Help.png" alt="HELP" />

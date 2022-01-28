@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: "Helvetica", "Arial", sans-serif;
+    font-family: "Roboto","Helvetica", "Arial", sans-serif;
     padding: 0;
     margin: 0;
   }
