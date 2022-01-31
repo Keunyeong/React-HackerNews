@@ -9,7 +9,7 @@ const App = styled.div`
   @media screen and (max-width: 375px) {
     width: 375px;
     height: ${812 - 44}px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
   }
 `;
 

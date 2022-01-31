@@ -9,7 +9,7 @@ const NavEl = styled.div`
     width: 375px;
     height: 40px;
     /* border: 1px solid blue; */
-    padding: 0 10px;
+    padding: 0 20px;
   }
 
   /* border: 1px solid blue; */
@@ -17,21 +17,24 @@ const NavEl = styled.div`
 
 const NavBtn = styled.div`
   @media screen and (max-width: 375px) {
-    width: ${375 / 5}px;
+    width: ${375 / 4}px;
     height: 40px;
+
     /* border: 1px solid orange; */
   }
   & > * {
-    line-height: 40px;
+    padding-top: 3px;
+    font-size: 1.1rem;
+    line-height: 37px;
     text-decoration: none;
-    color: black;
+    color: #999;
+    font-weight: 400;
     display: block;
-    /* border: 1px solid orange; */
+    border-bottom: 1px solid #ff6600;
   }
   &:hover {
     & > * {
-      color: orange;
-      border-bottom: 2px solid orange;
+      color: #ff6600;
     }
   }
 `;
@@ -40,7 +43,7 @@ const Nav = () => {
   return (
     <NavEl>
       <NavBtn>
-        <Link to="/news">News</Link>
+        <Link to="/Article">Article</Link>
       </NavBtn>
       <NavBtn>
         <Link to="/show">Show</Link>
@@ -49,7 +52,7 @@ const Nav = () => {
         <Link to="/ask">Ask</Link>
       </NavBtn>
       <NavBtn>
-        <Link to="/job">Job</Link>
+        <Link to="/jobs">Jobs</Link>
       </NavBtn>
     </NavEl>
   );

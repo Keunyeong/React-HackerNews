@@ -1,9 +1,14 @@
 import styled from "styled-components";
+import HomeRanking from "../components/HomeRanking";
 
 const Main = styled.div``;
 
 const Home = () => {
-  return <Main> 여기가 HOME 페이지 입니다.</Main>;
+  return (
+    <Main>
+      <HomeRanking></HomeRanking>
+    </Main>
+  );
 };
 
 export default Home;
