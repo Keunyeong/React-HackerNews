@@ -52,22 +52,21 @@ const Title = styled.h1`
 
 const OptionBox = styled.div`
   @media screen and (max-width: 375px) {
-    width: 50px;
-    height: 32px;
-    padding: 6px 0 0 0;
+    height: 35px;
+    padding: 0;
     /* border: 1px solid green; */
   }
   height: 120px;
-  padding: 45px 15px 0 0;
+  padding: 0;
   & > img {
     @media screen and (max-width: 375px) {
       width: auto;
       height: auto;
-      margin: 3px;
+      margin: 8.5px;
     }
     width: 20px;
     height: 20px;
-    margin: 9px;
+    margin: 19px;
   }
 `;
 

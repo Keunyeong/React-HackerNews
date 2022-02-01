@@ -7,6 +7,7 @@ import Application from "./components/Application";
 const Phone = styled.div`
   display: flex;
   flex-direction: column;
+  /* overflow: scroll; */
 `;
 
 export default function App() {

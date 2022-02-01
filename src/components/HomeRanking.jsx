@@ -1,9 +1,13 @@
 import styled from "styled-components";
-import Slider from "react-slick";
+// import Slider from "react-slick";
+import RankContents from "./RankContents";
 
+const Section = styled.div`
+  margin-bottom: 16px;
+`;
 const TitleBox = styled.div`
   margin: 36px 20px 24px 20px;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 `;
 const RankTitle = styled.h1`
   font-family: Times New Roman;
@@ -16,25 +20,26 @@ const RankTitle = styled.h1`
 `;
 const SlideBox = styled.div`
   @media screen and (max-width: 375px) {
-    width: 375px;
+    floor: left;
     height: 427px;
+    width: 375px;
+    background-color: #f2f3f7;
+    /* margin-top: -20px; */
+    padding-top: 4px;
   }
 `;
+
 const HomeRanking = () => {
   return (
-    <>
+    <Section>
       <TitleBox>
         <RankTitle>Current</RankTitle>
         <RankTitle> Total Top 5</RankTitle>
       </TitleBox>
       <SlideBox>
-        <Slider>
-          <div>
-            <h1>하이</h1>
-          </div>
-        </Slider>
+        <RankContents ranking={1} title={"harrypotter"} writer={"keunyeong"} />
       </SlideBox>
-    </>
+    </Section>
   );
 };
 

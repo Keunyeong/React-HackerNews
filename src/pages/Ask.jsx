@@ -1,9 +1,14 @@
 import styled from "styled-components";
+import MainList from "../components/MainList";
 
 const Main = styled.div``;
 
 const Ask = () => {
-  return <Main> 여기가 Ask 페이지 입니다.</Main>;
+  return (
+    <Main>
+      <MainList></MainList>
+    </Main>
+  );
 };
 
 export default Ask;

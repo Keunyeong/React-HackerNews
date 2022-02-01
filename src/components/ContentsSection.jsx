@@ -10,6 +10,7 @@ const Contents = styled.div`
   @media screen and (max-width: 375px) {
     width: 375px;
     height: ${812 - 44 - 60 - 40}px;
+    overflow: scroll;
     /* border: 1px solid blue; */
   }
   /* border: 1px solid blue; */
