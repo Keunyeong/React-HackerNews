@@ -1,7 +1,5 @@
 import styled from "styled-components";
-// import Slider from "react-slick";
-import RankContents from "./RankContents";
-
+import Slider from "./Slider";
 const Section = styled.div`
   margin-bottom: 16px;
 `;
@@ -37,7 +35,7 @@ const HomeRanking = () => {
         <RankTitle> Total Top 5</RankTitle>
       </TitleBox>
       <SlideBox>
-        <RankContents ranking={1} title={"harrypotter"} writer={"keunyeong"} />
+        <Slider></Slider>
       </SlideBox>
     </Section>
   );
