@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import useSWR from "swr";
 
 const RankContent = styled.div`
   border-radius: 30px;
@@ -60,20 +61,29 @@ const Shadow = styled.div`
   border-radius: 24px;
   z-index: 1;
 `;
-const RankContents = ({ ranking, title, writer }) => {
+const RankContents = ({ ranking, id }) => {
   let rankingNum = "00";
   if (ranking < 10) {
     rankingNum = "0" + String(ranking);
   } else {
     rankingNum = ranking;
   }
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  console.log(id);
+  const { data, error } = useSWR(
+    `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
+    fetcher
+  );
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+  console.log(data);
 
   return (
     <div style={{ position: "relative" }}>
       <RankContent>
         <RankNum>{rankingNum}</RankNum>
-        <RankArticle>{title}</RankArticle>
-        <RankArticleWriter>{writer}</RankArticleWriter>
+        <RankArticle>{data.title}</RankArticle>
+        <RankArticleWriter>{data.by}</RankArticleWriter>
       </RankContent>
       <Shadow />
     </div>

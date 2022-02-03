@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Card from "./Card";
+
 const Main = styled.div`
   @media screen and (max-width: 375px) {
     width: 375px;
@@ -38,7 +39,7 @@ const ListSelect = styled.img`
 `;
 const ViewSelect = styled.img``;
 
-const MainList = () => {
+const MainList = ({ list }) => {
   return (
     <Main>
       <Option>
@@ -50,11 +51,9 @@ const MainList = () => {
       </Option>
       <div className="list">
         <ul>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
+          {list.map((id) => {
+            return <Card id={id} key={id}></Card>;
+          })}
         </ul>
       </div>
     </Main>

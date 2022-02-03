@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import useSWR from "swr";
 
 const CardEl = styled.li`
   @media screen and (max-width: 375px) {
@@ -117,28 +118,34 @@ const CommentCount = styled.div`
   }
 `;
 
-const Card = () => {
+const Card = ({ id }) => {
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  console.log(id);
+  const { data, error } = useSWR(
+    `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
+    fetcher
+  );
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+  console.log(data);
   return (
     <CardEl>
       <TitleBox>
-        <h3>
-          Wg-access-server: WireGuard VPN server and web UI for device
-          management
-        </h3>
+        <h3>{data.title}</h3>
       </TitleBox>
       <Option>
         <WriterBox>
-          <span>bryan</span>
+          <span>{data.by}</span>
           <img src="images/Arrow.png" alt="ARROW" />
         </WriterBox>
         <InforBox>
           <PointCount>
             <img src="images/PointIcon.png" alt="POINTICON" />
-            <span>1000</span>
+            <span>{data.score}</span>
           </PointCount>
           <CommentCount>
             <img src="images/CommentIcon.png" alt="COMMENTICON" />
-            <span>1000</span>
+            <span>{data.kids ? data.kids.length : 0}</span>
           </CommentCount>
         </InforBox>
       </Option>

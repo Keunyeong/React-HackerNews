@@ -1,6 +1,7 @@
+import RankContents from "./RankContents";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import RankContents from "./RankContents";
+import { useSelector } from "react-redux";
 
 // Import Swiper styles
 import "swiper/css";
@@ -8,28 +9,24 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Pagination } from "swiper";
+
 const Slider = () => {
+  const list = useSelector((state) => state.top.json.slice(0, 5));
+  console.log("1");
+  console.log(list);
   return (
     <Swiper
       pagination={{ clickable: true }}
       modules={[Pagination]}
       className="mySwiper"
     >
-      <SwiperSlide>
-        <RankContents ranking={1} title={"harrypotter"} writer={"keyeong"} />
-      </SwiperSlide>
-      <SwiperSlide>
-        <RankContents ranking={2} title={"harrtter"} writer={"keuyeo"} />
-      </SwiperSlide>
-      <SwiperSlide>
-        <RankContents ranking={3} title={"hatter"} writer={"keneong"} />
-      </SwiperSlide>
-      <SwiperSlide>
-        <RankContents ranking={4} title={"harrypoter"} writer={"keuneong"} />
-      </SwiperSlide>
-      <SwiperSlide>
-        <RankContents ranking={5} title={"hattr"} writer={"keunyeng"} />
-      </SwiperSlide>
+      {list.map((obj, rank) => {
+        return (
+          <SwiperSlide key={obj}>
+            <RankContents ranking={rank + 1} id={obj} />
+          </SwiperSlide>
+        );
+      })}
     </Swiper>
   );
 };
