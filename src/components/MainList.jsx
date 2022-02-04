@@ -51,8 +51,8 @@ const MainList = ({ list }) => {
       </Option>
       <div className="list">
         <ul>
-          {list.map((id) => {
-            return <Card id={id} key={id}></Card>;
+          {list.map((id, index) => {
+            return <Card id={id} key={id} index={index}></Card>;
           })}
         </ul>
       </div>

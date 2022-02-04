@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import useSWR from "swr";
+import Spinner from "./Spinner";
+import Time from "./Time";
+import { useState } from "react";
 
 const RankContent = styled.div`
   border-radius: 30px;
@@ -62,6 +65,7 @@ const Shadow = styled.div`
   z-index: 1;
 `;
 const RankContents = ({ ranking, id }) => {
+  const [hour, setHour] = useState(0);
   let rankingNum = "00";
   if (ranking < 10) {
     rankingNum = "0" + String(ranking);
@@ -69,15 +73,12 @@ const RankContents = ({ ranking, id }) => {
     rankingNum = ranking;
   }
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  console.log(id);
   const { data, error } = useSWR(
     `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
     fetcher
   );
   if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
-  console.log(data);
-
+  if (!data) return <Spinner />;
   return (
     <div style={{ position: "relative" }}>
       <RankContent>

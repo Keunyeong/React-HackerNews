@@ -12,8 +12,6 @@ import { Pagination } from "swiper";
 
 const Slider = () => {
   const list = useSelector((state) => state.top.json.slice(0, 5));
-  console.log("1");
-  console.log(list);
   return (
     <Swiper
       pagination={{ clickable: true }}

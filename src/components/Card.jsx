@@ -1,7 +1,13 @@
+import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import useSWR from "swr";
+import Spinner from "./Spinner";
+import Draggable from "react-draggable";
 
 const CardEl = styled.li`
+  position: relative;
+`;
+const FrontBox = styled.div`
   @media screen and (max-width: 375px) {
     width: 335px;
     /* border: 1px solid pink; */
@@ -13,8 +19,63 @@ const CardEl = styled.li`
     flex-direction: column;
     align-items: flex-start;
     padding: 16px 16px 12px;
+    transition: all 0.3s ease-out;
   }
 `;
+const BackBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  left: 20px;
+  top: 0px;
+  bottom: 0px;
+  right: 20px;
+  z-index: -1;
+  border-radius: 18px;
+  /* border: 1px solid white; */
+  & > .rank {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 50%;
+    bottom: 0;
+    background-color: #ff6600;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 24px;
+    & > h2 {
+      font-size: 20px;
+      line-height: 22px;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+    & > span {
+      font-size: 12px;
+      line-height: 12px;
+      color: #ffffff;
+    }
+  }
+  & > .link {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 0;
+    bottom: 0;
+    background-color: #afd8d8;
+    border-radius: 18px;
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    & > img {
+      margin-right: 16px;
+    }
+  }
+`;
+
 const TitleBox = styled.div`
   @media screen and (max-width: 375px) {
     width: 303px;
@@ -118,37 +179,85 @@ const CommentCount = styled.div`
   }
 `;
 
-const Card = ({ id }) => {
+const Card = ({ id, index }) => {
+  let num = 0;
+  if (index + 1 < 10) {
+    num = "00" + String(index + 1);
+  } else if (index + 1 > 9 && index + 1 < 100) {
+    num = "0" + String(index + 1);
+  } else {
+    num = index + 1;
+  }
+
+  const nodeRef = useRef(null);
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  console.log(id);
   const { data, error } = useSWR(
     `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
     fetcher
   );
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isControlled, setIsControlled] = useState(true);
+  const handleDrag = (e, data) => {
+    setPosition({ x: data.x, y: data.y });
+  };
+  const handleStart = () => {
+    setIsControlled(false);
+  };
+  const handleStop = () => {
+    const URL = data.url
+      ? data.url
+      : `https://news.ycombinator.com/item?id=${id}`;
+    if (position.x === -100) {
+      window.open(URL, "_blank")?.focus();
+    }
+    setPosition({ x: 0, y: 0 });
+    setIsControlled(true);
+  };
+
   if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
-  console.log(data);
+  if (!data) return <Spinner />;
   return (
     <CardEl>
-      <TitleBox>
-        <h3>{data.title}</h3>
-      </TitleBox>
-      <Option>
-        <WriterBox>
-          <span>{data.by}</span>
-          <img src="images/Arrow.png" alt="ARROW" />
-        </WriterBox>
-        <InforBox>
-          <PointCount>
-            <img src="images/PointIcon.png" alt="POINTICON" />
-            <span>{data.score}</span>
-          </PointCount>
-          <CommentCount>
-            <img src="images/CommentIcon.png" alt="COMMENTICON" />
-            <span>{data.kids ? data.kids.length : 0}</span>
-          </CommentCount>
-        </InforBox>
-      </Option>
+      <Draggable
+        nodeRef={nodeRef}
+        position={position}
+        bounds={{ left: -100, right: 100, top: 0, bottom: 0 }}
+        onStart={handleStart}
+        onDrag={handleDrag}
+        onStop={handleStop}
+      >
+        <FrontBox ref={nodeRef} className="box">
+          <TitleBox>
+            <h3>{data.title}</h3>
+          </TitleBox>
+          <Option>
+            <WriterBox>
+              <span>{data.by}</span>
+              <img src="images/Arrow.png" alt="ARROW" />
+            </WriterBox>
+            <InforBox>
+              <PointCount>
+                <img src="images/PointIcon.png" alt="POINTICON" />
+                <span>{data.score}</span>
+              </PointCount>
+              <CommentCount>
+                <img src="images/CommentIcon.png" alt="COMMENTICON" />
+                <span>{data.kids ? data.kids.length : 0}</span>
+              </CommentCount>
+            </InforBox>
+          </Option>
+        </FrontBox>
+      </Draggable>
+      <BackBox>
+        <div className="rank">
+          <h2>{num}</h2>
+          <span>3 hours</span>
+          <span>ago</span>
+        </div>
+        <div className="link">
+          <img src="/images/link.png" alt="LINK" />
+        </div>
+      </BackBox>
     </CardEl>
   );
 };

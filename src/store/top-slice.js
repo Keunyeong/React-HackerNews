@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = { list: 0, json: [] };
+const topState = { list: 0, json: [] };
 
 const topSlice = createSlice({
   name: "top",
-  initialState,
+  initialState: topState,
   reducers: {
     addJson(state, action) {
       state.json = action.payload;
