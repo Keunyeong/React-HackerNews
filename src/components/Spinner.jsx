@@ -1,75 +1,62 @@
 import styled from "styled-components";
 
 const SpinnerBox = styled.div`
-  margin: 100px auto;
-  width: 50px;
-  height: 40px;
+  margin: 100px auto 0;
+  width: 70px;
   text-align: center;
-  font-size: 10px;
   & > div {
-    background-color: #333;
-    height: 100%;
-    width: 6px;
+    width: 18px;
+    height: 18px;
+    background-color: #ff6600;
+
+    border-radius: 100%;
     display: inline-block;
-
-    -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
-    animation: sk-stretchdelay 1.2s infinite ease-in-out;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
   }
 
-  & .rect2 {
-    -webkit-animation-delay: -1.1s;
-    animation-delay: -1.1s;
+  & .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
   }
 
-  & .rect3 {
-    -webkit-animation-delay: -1s;
-    animation-delay: -1s;
+  & .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
   }
 
-  & .rect4 {
-    -webkit-animation-delay: -0.9s;
-    animation-delay: -0.9s;
-  }
-
-  & .rect5 {
-    -webkit-animation-delay: -0.8s;
-    animation-delay: -0.8s;
-  }
-
-  @-webkit-keyframes sk-stretchdelay {
+  @-webkit-keyframes sk-bouncedelay {
     0%,
-    40%,
+    80%,
     100% {
-      -webkit-transform: scaleY(0.4);
+      -webkit-transform: scale(0);
     }
-    20% {
-      -webkit-transform: scaleY(1);
+    40% {
+      -webkit-transform: scale(1);
     }
   }
 
-  @keyframes sk-stretchdelay {
+  @keyframes sk-bouncedelay {
     0%,
-    40%,
+    80%,
     100% {
-      transform: scaleY(0.4);
-      -webkit-transform: scaleY(0.4);
+      -webkit-transform: scale(0);
+      transform: scale(0);
     }
-    20% {
-      transform: scaleY(1);
-      -webkit-transform: scaleY(1);
+    40% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
     }
   }
 `;
 
 const Spinner = () => {
   return (
-    <div className="spinner">
-      <div className="rect1"></div>
-      <div className="rect2"></div>
-      <div className="rect3"></div>
-      <div className="rect4"></div>
-      <div className="rect5"></div>
-    </div>
+    <SpinnerBox>
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </SpinnerBox>
   );
 };
 
