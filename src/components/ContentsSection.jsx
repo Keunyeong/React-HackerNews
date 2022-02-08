@@ -5,6 +5,7 @@ import Ask from "../pages/Ask.jsx";
 import Show from "../pages/Show.jsx";
 import Article from "../pages/Article.jsx";
 import Jobs from "../pages/Jobs.jsx";
+import Detail from "./Detail";
 
 const Contents = styled.div`
   @media screen and (max-width: 375px) {
@@ -21,6 +22,7 @@ const ContentsSection = () => {
     <Contents>
       <Routes>
         <Route path="/" element={<Home />}></Route>
+        <Route path="/:id" element={<Detail />}></Route>
         <Route path="/Article" element={<Article />}></Route>
         <Route path="/show" element={<Show />}></Route>
         <Route path="/ask" element={<Ask />}></Route>

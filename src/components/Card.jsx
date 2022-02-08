@@ -3,6 +3,7 @@ import styled from "styled-components";
 import useSWR from "swr";
 import Spinner from "./Spinner";
 import Draggable from "react-draggable";
+import { Link } from "react-router-dom";
 
 const CardEl = styled.li`
   position: relative;
@@ -26,13 +27,12 @@ const BackBox = styled.div`
   display: flex;
   justify-content: space-between;
   position: absolute;
-  left: 20px;
-  top: 0px;
-  bottom: 0px;
-  right: 20px;
+  left: 21px;
+  top: 1px;
+  bottom: 1px;
+  right: 21px;
   z-index: -1;
   border-radius: 18px;
-  /* border: 1px solid white; */
   & > .rank {
     position: absolute;
     top: 0;
@@ -80,7 +80,7 @@ const TitleBox = styled.div`
   @media screen and (max-width: 375px) {
     width: 303px;
   }
-  & > h3 {
+  & h3 {
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -213,7 +213,10 @@ const Card = ({ id, index }) => {
     setPosition({ x: 0, y: 0 });
     setIsControlled(true);
   };
-
+  const cardEvent = (e) => {
+    e.preventDefault();
+    e.target.click();
+  };
   if (error) return <div>failed to load</div>;
   if (!data) return <Spinner />;
   return (
@@ -225,10 +228,13 @@ const Card = ({ id, index }) => {
         onStart={handleStart}
         onDrag={handleDrag}
         onStop={handleStop}
+        onMouseDown={cardEvent}
       >
         <FrontBox ref={nodeRef} className="box">
           <TitleBox>
-            <h3>{data.title}</h3>
+            <Link to={`/${id}`}>
+              <h3>{data.title}</h3>
+            </Link>
           </TitleBox>
           <Option>
             <WriterBox>

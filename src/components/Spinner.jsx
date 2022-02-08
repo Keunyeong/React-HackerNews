@@ -53,9 +53,9 @@ const SpinnerBox = styled.div`
 const Spinner = () => {
   return (
     <SpinnerBox>
-      <div class="bounce1"></div>
-      <div class="bounce2"></div>
-      <div class="bounce3"></div>
+      <div className="bounce1"></div>
+      <div className="bounce2"></div>
+      <div className="bounce3"></div>
     </SpinnerBox>
   );
 };
