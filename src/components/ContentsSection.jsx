@@ -8,6 +8,7 @@ import Jobs from "../pages/Jobs.jsx";
 import Detail from "./Detail";
 
 const Contents = styled.div`
+  margin: 0;
   @media screen and (max-width: 375px) {
     width: 375px;
     height: ${812 - 44 - 60 - 40}px;

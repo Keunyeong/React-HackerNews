@@ -203,20 +203,30 @@ const Card = ({ id, index }) => {
   const handleStart = () => {
     setIsControlled(false);
   };
-  const handleStop = () => {
+  const handleStop = (e) => {
     const URL = data.url
       ? data.url
       : `https://news.ycombinator.com/item?id=${id}`;
     if (position.x === -100) {
       window.open(URL, "_blank")?.focus();
     }
-    setPosition({ x: 0, y: 0 });
+    if (position.x === 0 && position.y === 0) {
+      const h3 = document.querySelector(`.title${id}`);
+      const link = document.querySelector(`.link${id}`);
+      console.log(e.target === h3);
+      if (e.target === h3) {
+        link.click();
+      }
+    } else {
+      setPosition({ x: 0, y: 0 });
+    }
+
     setIsControlled(true);
   };
-  const cardEvent = (e) => {
-    e.preventDefault();
-    e.target.click();
-  };
+  // const cardEvent = (e) => {
+  //   e.preventDefault();
+  //   e.target.click();
+  // };
   if (error) return <div>failed to load</div>;
   if (!data) return <Spinner />;
   return (
@@ -228,12 +238,12 @@ const Card = ({ id, index }) => {
         onStart={handleStart}
         onDrag={handleDrag}
         onStop={handleStop}
-        onMouseDown={cardEvent}
+        // onMouseDown={cardEvent}
       >
         <FrontBox ref={nodeRef} className="box">
           <TitleBox>
-            <Link to={`/${id}`}>
-              <h3>{data.title}</h3>
+            <Link to={`/${id}`} className={`link${id}`}>
+              <h3 className={`title${id}`}>{data.title}</h3>
             </Link>
           </TitleBox>
           <Option>

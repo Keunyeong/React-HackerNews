@@ -6,7 +6,9 @@ import { topActions } from "../store/top-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-const Main = styled.div``;
+const Main = styled.div`
+  margin: 0;
+`;
 
 const Home = () => {
   const dispatch = useDispatch();

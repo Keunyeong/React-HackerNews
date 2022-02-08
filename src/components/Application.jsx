@@ -4,6 +4,7 @@ import Head from "./Head";
 import Nav from "./Nav";
 
 const App = styled.div`
+  margin: 0;
   display: flex;
   flex-direction: column;
   @media screen and (max-width: 375px) {
