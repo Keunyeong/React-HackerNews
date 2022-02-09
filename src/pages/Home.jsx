@@ -11,6 +11,7 @@ const Main = styled.div`
 `;
 
 const Home = () => {
+  const [page, setPage] = useState(20);
   const dispatch = useDispatch();
   const url = "https://hacker-news.firebaseio.com/v0/topstories.json";
   useEffect(() => {
@@ -19,13 +20,12 @@ const Home = () => {
       dispatch(topActions.addJson(data));
     })();
   }, []);
-
-  const [page, setPage] = useState(20);
   const list = useSelector((state) => state.top.json.slice(0, page));
+
   return (
     <Main>
       <HomeRanking></HomeRanking>
-      <MainList list={list}></MainList>
+      <MainList list={list} page={page} setPage={setPage}></MainList>
     </Main>
   );
 };

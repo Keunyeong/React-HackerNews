@@ -9,7 +9,7 @@ const Main = styled.div``;
 
 const Article = () => {
   const dispatch = useDispatch();
-  const url = "https://hacker-news.firebaseio.com/v0/topstories.json";
+  const url = "https://hacker-news.firebaseio.com/v0/newstories.json";
   useEffect(() => {
     (async () => {
       const data = await fetchNums(url);
@@ -21,7 +21,7 @@ const Article = () => {
   const list = useSelector((state) => state.top.json.slice(0, page));
   return (
     <Main>
-      <MainList list={list}></MainList>
+      <MainList list={list} page={page} setPage={setPage}></MainList>
     </Main>
   );
 };

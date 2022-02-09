@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-// import { useParams } from "react-router-dom";
 import Spinner from "./Spinner";
-import hour from "../hooks/hour";
 
 const Comment = ({ id, parent, num }) => {
   const [data, setData] = useState();
@@ -101,6 +99,8 @@ const CommentEl = styled.div`
   word-wrap: break-word;
   a {
     font-weight: 700;
+    background-color: #c4c4c4;
+    border-radius: 5px;
   }
   & > .gap {
     width: 12px;

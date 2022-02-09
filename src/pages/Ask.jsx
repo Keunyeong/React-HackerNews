@@ -20,7 +20,7 @@ const Ask = () => {
   const list = useSelector((state) => state.top.json.slice(0, page));
   return (
     <Main>
-      <MainList list={list}></MainList>
+      <MainList list={list} page={page} setPage={setPage}></MainList>
     </Main>
   );
 };
