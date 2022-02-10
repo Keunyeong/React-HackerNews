@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import styled from "styled-components";
 import useSWR from "swr";
 import Spinner from "./Spinner";
-import Draggable from "react-draggable";
 import { Link } from "react-router-dom";
 
 const Card = ({ id, index, open }) => {
@@ -24,37 +23,13 @@ const Card = ({ id, index, open }) => {
 
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isControlled, setIsControlled] = useState(true);
-  const handleDrag = (e, data) => {
-    setPosition({ x: data.x, y: data.y });
-  };
-  const handleStart = () => {
-    setIsControlled(false);
-  };
-  const handleStop = (e) => {
-    const URL = data.url
-      ? data.url
-      : `https://news.ycombinator.com/item?id=${id}`;
-    if (position.x === -100) {
-      window.open(URL, "_blank")?.focus();
-    }
-    if (position.x === 0 && position.y === 0) {
-      const h3 = document.querySelector(`.title${id}`);
-      const link = document.querySelector(`.link${id}`);
-      const writer = document.querySelector(`.by${id}`);
-      if (e.target === h3) {
-        link.click();
-      }
-      if (e.target === writer) {
-        open(data.by);
-      }
-    } else {
-      setPosition({ x: 0, y: 0 });
-    }
 
-    setIsControlled(true);
-  };
   if (error) return <div>failed to load</div>;
   if (!data) return <Spinner />;
+  let urlArr = [];
+  if (data.url) {
+    urlArr = data.url.split("/");
+  }
   const lapse = (new Date().getTime() - Number(data.time) * 1000) / 60000;
   const lapseMin = Math.floor(lapse);
   const lapseHour = Math.floor(lapseMin / 60);
@@ -72,49 +47,52 @@ const Card = ({ id, index, open }) => {
   }
   return (
     <CardEl>
-      <Draggable
-        nodeRef={nodeRef}
-        position={position}
-        bounds={{ left: -100, right: 100, top: 0, bottom: 0 }}
-        onStart={handleStart}
-        onDrag={handleDrag}
-        onStop={handleStop}
-        // onMouseDown={cardEvent}
-      >
-        <FrontBox ref={nodeRef} className="box">
-          <TitleBox>
-            <Link to={`/${id}`} className={`link${id}`}>
-              <h3 className={`title${id}`}>{data.title}</h3>
-            </Link>
-          </TitleBox>
-          <Option>
-            <WriterBox>
-              <span className={`by${id}`}>{data.by}</span>
-              <img src="images/Arrow.png" alt="ARROW" />
-            </WriterBox>
-            <InforBox>
-              <PointCount>
-                <img src="images/PointIcon.png" alt="POINTICON" />
-                <span>{data.score}</span>
-              </PointCount>
-              <CommentCount>
-                <img src="images/CommentIcon.png" alt="COMMENTICON" />
-                <span>{data.kids ? data.kids.length : 0}</span>
-              </CommentCount>
-            </InforBox>
-          </Option>
-        </FrontBox>
-      </Draggable>
-      <BackBox>
-        <div className="rank">
-          <h2>{num}</h2>
-          <span>{lapseTime}</span>
-          <span>ago</span>
+      <FrontBox ref={nodeRef} className="box">
+        <div className="card-head">
+          <div className="number">
+            <h2>{num}</h2>
+            <span>{`${lapseTime} ago`}</span>
+          </div>
+          <div className="url-link">
+            <a href={data.url} target="_blank">
+              {urlArr[2]}
+            </a>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4 8.5C4 7.645 4.645 7 5.5 7H6.5C6.5 7 7 7 7 6.5C7 6 6.5 6 6.5 6H5.5C4.12 6 3 7.12 3 8.5C3 9.88 4.12 11 5.5 11H6.5C6.5 11 7 11 7 10.5C7 10 6.5 10 6.5 10H5.5C4.645 10 4 9.355 4 8.5ZM6 9H10C10 9 10.5 9 10.5 8.5C10.5 8 10 8 10 8H6C6 8 5.5 8 5.5 8.5C5.5 9 6 9 6 9ZM10.5 6H9.5C9.5 6 9 6 9 6.5C9 7 9.5 7 9.5 7H10.5C11.355 7 12 7.645 12 8.5C12 9.355 11.355 10 10.5 10H9.5C9.5 10 9 10 9 10.5C9 11 9.5 11 9.5 11H10.5C11.88 11 13 9.88 13 8.5C13 7.12 11.88 6 10.5 6Z"
+                fill="#AFD8D8"
+              />
+            </svg>
+          </div>
         </div>
-        <div className="link">
-          <img src="/images/link.png" alt="LINK" />
-        </div>
-      </BackBox>
+        <TitleBox>
+          <Link to={`/${id}`} className={`link${id}`}>
+            <h3 className={`title${id}`}>{data.title}</h3>
+          </Link>
+        </TitleBox>
+        <Option>
+          <WriterBox>
+            <span className={`by${id}`}>{data.by}</span>
+            <img src="images/Arrow.png" alt="ARROW" />
+          </WriterBox>
+          <InforBox>
+            <PointCount>
+              <img src="images/PointIcon.png" alt="POINTICON" />
+              <span>{data.score}</span>
+            </PointCount>
+            <CommentCount>
+              <img src="images/CommentIcon.png" alt="COMMENTICON" />
+              <span>{data.kids ? data.kids.length : 0}</span>
+            </CommentCount>
+          </InforBox>
+        </Option>
+      </FrontBox>
     </CardEl>
   );
 };
@@ -123,6 +101,47 @@ const CardEl = styled.li`
   position: relative;
 `;
 const FrontBox = styled.div`
+  & .card-head {
+    display: flex;
+    justify-content: space-between;
+    @media screen and (max-width: 375px) {
+      width: 295px;
+      margin-bottom: 8px;
+    }
+    & > .number {
+      display: flex;
+      justify-content: space-between;
+      & > h2 {
+        font-size: 20px;
+        line-height: 22px;
+        color: #ff6600;
+      }
+      & > span {
+        display: block;
+        margin: 5px 0 0 4px;
+        font-size: 12px;
+        line-height: 16px;
+        color: rgba(255, 102, 0, 0.5);
+      }
+    }
+    & > .url-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      & > a {
+        display: block;
+        font-size: 12px;
+        line-height: 16px;
+        text-align: right;
+        color: #999999;
+        opacity: 0.7;
+        margin-top: 4px;
+      }
+      & > svg {
+        display: flex;
+      }
+    }
+  }
   @media screen and (max-width: 375px) {
     width: 335px;
     /* border: 1px solid pink; */
@@ -137,58 +156,6 @@ const FrontBox = styled.div`
     transition: all 0.3s ease-out;
   }
 `;
-const BackBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  left: 21px;
-  top: 1px;
-  bottom: 1px;
-  right: 21px;
-  z-index: -1;
-  border-radius: 18px;
-  & > .rank {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 50%;
-    bottom: 0;
-    background-color: #ff6600;
-    border-radius: 18px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    padding-left: 24px;
-    & > h2 {
-      font-size: 20px;
-      line-height: 22px;
-      color: #ffffff;
-      margin-bottom: 2px;
-    }
-    & > span {
-      font-size: 12px;
-      line-height: 12px;
-      color: #ffffff;
-    }
-  }
-  & > .link {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    right: 0;
-    bottom: 0;
-    background-color: #afd8d8;
-    border-radius: 18px;
-    text-align: right;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    & > img {
-      margin-right: 16px;
-    }
-  }
-`;
 
 const TitleBox = styled.div`
   @media screen and (max-width: 375px) {
@@ -197,9 +164,9 @@ const TitleBox = styled.div`
   & h3 {
     font-family: Roboto;
     font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 24px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
     color: #111111;
     text-align: left;
   }

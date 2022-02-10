@@ -27,12 +27,12 @@ const SlideBox = styled.div`
   }
 `;
 
-const HomeRanking = () => {
+const HomeRanking = ({ sort }) => {
   return (
     <Section>
       <TitleBox>
         <RankTitle>Current</RankTitle>
-        <RankTitle> Total Top 5</RankTitle>
+        <RankTitle> Total {!sort ? "Top" : "New"} 5</RankTitle>
       </TitleBox>
       <SlideBox>
         <Slider></Slider>

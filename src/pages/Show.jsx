@@ -8,6 +8,10 @@ import { useEffect, useState } from "react";
 const Main = styled.div``;
 
 const Show = () => {
+  const [sort, setSort] = useState(false);
+  function sortConvert() {
+    setSort(!sort);
+  }
   const dispatch = useDispatch();
   const url = "https://hacker-news.firebaseio.com/v0/showstories.json";
   useEffect(() => {
@@ -21,7 +25,13 @@ const Show = () => {
   const list = useSelector((state) => state.top.json.slice(0, page));
   return (
     <Main>
-      <MainList list={list} page={page} setPage={setPage}></MainList>
+      <MainList
+        list={list}
+        page={page}
+        setPage={setPage}
+        sortConvert={sortConvert}
+        sort={sort}
+      ></MainList>
     </Main>
   );
 };

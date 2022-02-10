@@ -2,9 +2,9 @@ import { useState } from "react";
 import styled from "styled-components";
 import Card from "./Card";
 import Modal from "./Modal";
+import CardWide from "./CardWide";
 
-const MainList = ({ list, page, setPage }) => {
-  const [sort, setSort] = useState(false);
+const MainList = ({ list, page, setPage, sort, sortConvert }) => {
   const [view, setView] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState("");
@@ -23,9 +23,6 @@ const MainList = ({ list, page, setPage }) => {
     setView(!view);
   }
 
-  function sortConvert() {
-    setSort(!sort);
-  }
   return (
     <>
       <Main>
@@ -66,13 +63,13 @@ const MainList = ({ list, page, setPage }) => {
         </Option>
         <div className="list">
           <ul>
-            {view
-              ? list.map((id, index) => {
-                  return (
-                    <Card id={id} key={id} index={index} open={open}></Card>
-                  );
-                })
-              : null}
+            {list.map((id, index) => {
+              return view ? (
+                <Card id={id} key={id} index={index} open={open}></Card>
+              ) : (
+                <CardWide id={id} key={id} index={index} open={open}></CardWide>
+              );
+            })}
           </ul>
         </div>
         <div className="more" onClick={addCount}>
