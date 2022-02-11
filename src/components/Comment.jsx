@@ -21,6 +21,7 @@ const Comment = ({ id, parent, num }) => {
         setError(error);
         if (error.name === "AbortError") {
           // requset를 abort하는 과정에서 에러 발생
+          console.log("AbortError");
         }
       }
     };

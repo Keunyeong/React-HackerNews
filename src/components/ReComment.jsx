@@ -43,7 +43,7 @@ const ReComment = ({ id, num }) => {
     };
   }, []);
   const RenderReply = (parentId) => {
-    return recomments.map((comment, index) => (
+    return recomments.map((comment) => (
       <div key={comment}>
         <Comment key={comment} parent={parentId} id={comment} num={renum} />
         <ReComment
