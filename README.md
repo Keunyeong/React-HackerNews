@@ -95,5 +95,7 @@
 ### 상태 설계하기
 
 ### URL 구조 설계하기
+
+### 유저 모달 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/79135142/153715857-eff82ae7-e6cb-4ec2-8dc6-bb074edcbf08.gif)
 
