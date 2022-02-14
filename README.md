@@ -96,6 +96,13 @@
 
 ### URL 구조 설계하기
 
+### 기획 & 디자인
+
+![HackerNewsDesgin(1)](https://user-images.githubusercontent.com/79135142/153792591-5c5f3e56-4b74-4303-996a-ebca7d73ed35.gif)
+![HackerNewsDesgin(2)](https://user-images.githubusercontent.com/79135142/153792605-419c22cf-6400-41fa-b193-c7923cc29596.gif)
+![HackerNewsDesgin(3)](https://user-images.githubusercontent.com/79135142/153792622-048487a9-dc36-45b2-b5fc-0a0010312422.gif)
+
+
 ### 유저 모달 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/79135142/153715857-eff82ae7-e6cb-4ec2-8dc6-bb074edcbf08.gif)
 
