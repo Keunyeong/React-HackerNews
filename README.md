@@ -99,7 +99,7 @@
 ### 기획 & 디자인
 
 ![HackerNewsDesgin(1)](https://user-images.githubusercontent.com/79135142/153792591-5c5f3e56-4b74-4303-996a-ebca7d73ed35.gif)
-![HackerNewsDesgin(2)](https://user-images.githubusercontent.com/79135142/153792605-419c22cf-6400-41fa-b193-c7923cc29596.gif)
+![HackerNewsDesgin(2)](https://user-images.githubusercontent.com/79135142/153792840-074c12b6-01a3-45b6-913a-f57c09fef05f.gif)
 ![HackerNewsDesgin(3)](https://user-images.githubusercontent.com/79135142/153792622-048487a9-dc36-45b2-b5fc-0a0010312422.gif)
 
 
