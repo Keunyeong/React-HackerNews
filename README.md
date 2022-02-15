@@ -102,6 +102,9 @@
 ![HackerNewsDesgin(2)](https://user-images.githubusercontent.com/79135142/153792840-074c12b6-01a3-45b6-913a-f57c09fef05f.gif)
 ![HackerNewsDesgin(3)](https://user-images.githubusercontent.com/79135142/153792622-048487a9-dc36-45b2-b5fc-0a0010312422.gif)
 
+### slider
+![slider](https://user-images.githubusercontent.com/79135142/154078038-1a239707-5c72-4dc3-b2af-b9e35053f555.gif)
+
 
 ### 유저 모달 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/79135142/153715857-eff82ae7-e6cb-4ec2-8dc6-bb074edcbf08.gif)
