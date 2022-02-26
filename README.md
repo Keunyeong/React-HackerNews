@@ -106,6 +106,7 @@
 (⌘ 디자이너 최희경님 발표 참조)
 
 ### slider
+slider 라이브러리 사용.
 ![slider](https://user-images.githubusercontent.com/79135142/154078038-1a239707-5c72-4dc3-b2af-b9e35053f555.gif)
 
 
